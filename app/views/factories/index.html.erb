@@ -1,0 +1,27 @@
+<table>
+  <thead>
+    <tr>
+      <th>Factory</th>
+      <th>Level</th>
+      <th>Resources available</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @factories.each do |factory| %>
+      <tr>
+        <td><%= readable_factory_name(factory) %></td>
+        <td><%= factory.level %></td>
+        <td><%= factory.resources %></td>
+        <td>
+            <% if factory.upgradeable? %>
+                <%= button_to "Upgrade", factory_upgrade_path(factory), method: :put %>
+            <% else %>
+                Factory not upgradeable yet.
+            <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

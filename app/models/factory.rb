@@ -35,7 +35,7 @@ class Factory < ApplicationRecord
 
   def update_resources!
     newly_created_resources = (seconds_since_last_update * production_per_second)
-    update!(resources: resources + newly_created_resources)
+    update!(resources: resources + newly_created_resources, resource_updated_at: Time.now)
   end
 
   def upgradeable?
@@ -61,6 +61,7 @@ class Factory < ApplicationRecord
         factory = player.factories.find_by(type: resource[0].to_s)
         factory.update!(resources: factory.resources - resource[1])
       end
+      update!(level: level + 1)
     end
   end
 end

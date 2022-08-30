@@ -1,0 +1,8 @@
+<p>
+  Factories status :
+  <ul>
+    <% @factories.each do |factory| %>
+      <li>(<%= readable_factory_name(factory) %> - <%= factory.resources %>)</li>
+    <% end %>
+  </ul>
+</p>
