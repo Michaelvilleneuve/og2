@@ -18,6 +18,7 @@ module Factories
 
     def process
       player.factories.each do |factory|
+        factory.update_resources! if factory.can_update_resources?
       end
     end
   end

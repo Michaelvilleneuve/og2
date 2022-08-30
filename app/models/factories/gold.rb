@@ -2,6 +2,7 @@
 
 module Factories
   class Gold < Factory
+    UPGRADE_RATE = :minute
     LEVELS = {
       1 => {
         production_per_second: 2 / 60,

@@ -2,6 +2,7 @@
 
 module Factories
   class Iron < Factory
+    UPGRADE_RATE = :second
     LEVELS = {
       1 => {
         production_per_second: 10,

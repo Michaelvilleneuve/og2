@@ -5,15 +5,21 @@ gold:
   resources: 0
   type: "Factories::Gold"
   player: one
+  resource_updated_at: <%= Time.now %>
+  upgraded_at: <%= Time.now %>
 
 copper:
   level: 1
   resources: 0
   type: "Factories::Copper"
   player: one
+  resource_updated_at: <%= Time.now %>
+  upgraded_at: <%= Time.now %>
 
 iron:
   level: 1
   resources: 0
   type: "Factories::Iron"
   player: one
+  resource_updated_at: <%= Time.now %>
+  upgraded_at: <%= Time.now %>
