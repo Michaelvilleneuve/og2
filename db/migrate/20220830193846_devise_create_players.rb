@@ -11,6 +11,5 @@ class DeviseCreatePlayers < ActiveRecord::Migration[6.1]
     end
 
     add_index :players, :email,                unique: true
-    add_index :players, :reset_password_token, unique: true
   end
 end

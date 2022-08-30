@@ -3,8 +3,11 @@
 require 'test_helper'
 
 class PlayerTest < ActiveSupport::TestCase
-  test 'has many factories' do
-    player = Player.create!(email: 'hello@hunter.io', password: 'azerty')
-    assert_equal player.factories.count, 0, 'factories should be an empty collection'
+  test 'creating a player generates his factories' do
+    player = Player.create!(email: "hello2@hunter.io", password: "azerty")
+
+    assert player.factories.exists?(type: Factories::Gold.name)
+    assert player.factories.exists?(type: Factories::Copper.name)
+    assert player.factories.exists?(type: Factories::Iron.name)
   end
 end

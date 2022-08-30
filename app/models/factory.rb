@@ -1,17 +1,21 @@
 # frozen_string_literal: true
 
 class Factory < ApplicationRecord
-  belongs_to :player
+  belongs_to :player, optional: true
 
-  def production_per_second
-    0
+  def level_properties
+    self.class::LEVELS[level]
   end
 
-  def next_upgrade_duration
-    0
+  def production_per_second
+    level_properties[:production_per_second]
   end
 
   def upgrade_cost
-    0
+    level_properties[:upgrade_cost]
+  end
+
+  def next_upgrade_duration_in_seconds
+    level * 15
   end
 end

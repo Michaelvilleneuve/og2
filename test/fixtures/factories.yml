@@ -1,11 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+gold:
   level: 1
-  resources: 1
+  resources: 0
+  type: "Factories::Gold"
   player: one
 
-two:
+copper:
   level: 1
-  resources: 1
-  player: two
+  resources: 0
+  type: "Factories::Copper"
+  player: one
+
+iron:
+  level: 1
+  resources: 0
+  type: "Factories::Iron"
+  player: one
