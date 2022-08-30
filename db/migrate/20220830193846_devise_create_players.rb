@@ -10,6 +10,6 @@ class DeviseCreatePlayers < ActiveRecord::Migration[6.1]
       t.timestamps null: false
     end
 
-    add_index :players, :email,                unique: true
+    add_index :players, :email, unique: true
   end
 end

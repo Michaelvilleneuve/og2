@@ -1,24 +1,4 @@
-# README
+# Somes notes for the reader
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Why an inheritance for the factory ?
+Inheritance have some drawbacks, especially when using ActiveRecord, but since all factories have the same columns it made sense to use an STI there.
