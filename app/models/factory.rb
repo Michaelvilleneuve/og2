@@ -37,4 +37,30 @@ class Factory < ApplicationRecord
     newly_created_resources = (seconds_since_last_update * production_per_second)
     update!(resources: resources + newly_created_resources)
   end
+
+  def upgradeable?
+    upper_level? && enough_resources_to_upgrade?
+  end
+
+  def upper_level?
+    self.class::LEVELS[level + 1].present?
+  end
+
+  def enough_resources_to_upgrade?
+    upgrade_cost.map do |resource|
+      factory = player.factories.find_by(type: resource[0].to_s)
+      factory.resources >= resource[1]
+    end.none?(false)
+  end
+
+  def upgrade!
+    raise "Unable to upgrade" unless upgradeable?
+
+    ActiveRecord::Base.transaction do
+      upgrade_cost.each do |resource|
+        factory = player.factories.find_by(type: resource[0].to_s)
+        factory.update!(resources: factory.resources - resource[1])
+      end
+    end
+  end
 end

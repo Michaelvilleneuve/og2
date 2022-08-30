@@ -2,7 +2,7 @@
 
 namespace :factories do
   task work: :environment do
-    puts "Starting worker"
+    puts 'Starting worker'
     loop do
       Factories::Miners.work
     end
