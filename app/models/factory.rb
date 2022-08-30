@@ -39,7 +39,7 @@ class Factory < ApplicationRecord
   end
 
   def upgradeable?
-    upper_level? && enough_resources_to_upgrade?
+    upper_level? && enough_resources_to_upgrade? && enough_time_elapsed_since_last_upgrade?
   end
 
   def upper_level?
@@ -53,8 +53,12 @@ class Factory < ApplicationRecord
     end.none?(false)
   end
 
+  def enough_time_elapsed_since_last_upgrade?
+    Time.now.to_i - upgraded_at.to_i > next_upgrade_duration_in_seconds
+  end
+
   def upgrade!
-    raise "Unable to upgrade" unless upgradeable?
+    raise 'Unable to upgrade' unless upgradeable?
 
     ActiveRecord::Base.transaction do
       upgrade_cost.each do |resource|

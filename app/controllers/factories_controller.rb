@@ -1,17 +1,18 @@
+# frozen_string_literal: true
+
 class FactoriesController < ApplicationController
   before_action :authenticate_player!
 
-  def index
-  end
+  def index; end
 
   def upgrade
     begin
       factory.upgrade!
-    rescue
-      redirect_to factories_path, notice: "Unable to upgrade factory" 
+    rescue StandardError
+      redirect_to factories_path, notice: 'Unable to upgrade factory'
     end
 
-    redirect_to factories_path, notice: "Factory upgraded to level #{factory.level}" 
+    redirect_to factories_path, notice: "Factory upgraded to level #{factory.level}"
   end
 
   private

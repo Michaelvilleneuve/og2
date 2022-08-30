@@ -57,13 +57,28 @@ class FactoryTest < ActiveSupport::TestCase
     assert gold_factory.enough_resources_to_upgrade?
   end
 
-  test "upgrading deducts resources from factories" do
+  test 'ensure enough time elapsed before upgrading' do
+    gold_factory = factories(:gold)
+    assert_not gold_factory.enough_time_elapsed_since_last_upgrade?
+
+    travel 20.seconds
+    assert gold_factory.enough_time_elapsed_since_last_upgrade?
+
+    gold_factory.level = 2
+    assert_not gold_factory.enough_time_elapsed_since_last_upgrade?
+
+    travel 20.seconds
+    assert gold_factory.enough_time_elapsed_since_last_upgrade?
+  end
+
+  test 'upgrading deducts resources from factories' do
     player = players(:one)
     gold_factory = player.factories.find_by(type: Factories::Gold.to_s)
     copper_factory = player.factories.find_by(type: Factories::Copper.to_s)
 
     copper_factory.update!(resources: 110)
     gold_factory.update!(resources: 4)
+    travel 30.seconds
 
     gold_factory.upgrade!
     assert_equal 2, gold_factory.reload.resources
