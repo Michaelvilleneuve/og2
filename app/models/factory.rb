@@ -16,6 +16,11 @@ class Factory < ApplicationRecord
   end
 
   def next_upgrade_duration_in_seconds
-    level * 15
+    return 15 if level == 1
+    (level - 1) * 30
+  end
+
+  def level_up!
+    update!(level: level + 1)
   end
 end
